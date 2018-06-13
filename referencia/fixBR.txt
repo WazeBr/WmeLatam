@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+# Trata Ur v1.0
+#
+# Copyright (c) 2015 Andre Felicio <andre@felicio.com.br>
+#
+# Provides an easy way to manager Waze's UR (SPAM).
+# Created for educational and personal use. Do not use for editing
+# the maps unless you comply with the terms of your community.
+#
+
+USERNAME=antigerme
+PASSWORD=MINHASENHAPORRA
+BOXFILE=placesBR.box
+
+##### CODE #####
+
+JQ=/usr/bin/jq
+TMPDIR=/tmp
+CURL="curl -s -c $TMPDIR/cookies -b $TMPDIR/cookies"
+
+$CURL "https://www.waze.com/row-Descartes-live/app/Session" > /dev/null
+CSRFToken=$(grep csrf_token $TMPDIR/cookies | cut -f7)
+$CURL "https://www.waze.com/login/create" --data "user_id=$USERNAME&password=$PASSWORD" -H "X-CSRF-Token: $CSRFToken" > /dev/null
+
+while read BOX
+do
+	echo $BOX
+	# GET INFO
+	$CURL "https://www.waze.com/row-Descartes-live/app/Features?venueLevel=4&venueFilter=0&bbox=${BOX}&roadTypes=1%2C2%2C3%2C4%2C5%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%2C16%2C17%2C18%2C19%2C20%2C21&cameras=true" > $TMPDIR/BRFix.json
+
+	# Lock Places
+	$JQ ".venues.objects[] | select (.geometry.type==\"Polygon\") | select (.approved==true) | select (.lockRank < 2) | select (.permissions < 0) | .id" $TMPDIR/BRFix.json > $TMPDIR/BRFix.tmp
+	while read PLACEID
+	do
+	        $CURL "https://www.waze.com/row-Descartes-live/app/Features?language=pt-BR&bbox=0%2C0%2C0%2C0" -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRFToken" --data-binary "{\"actions\":{\"name\":\"CompositeAction\",\"_subActions\":[{\"_objectType\":\"venue\",\"action\":\"UPDATE\",\"attributes\":{\"lockRank\":2,\"id\":${PLACEID}}}]}}"
+		sleep 1
+	done < "$TMPDIR/BRFix.tmp"
+
+        # Clean CAMs
+        $JQ ".cameras.objects[] | select (.validated==false) | .id" $TMPDIR/BRFix.json > $TMPDIR/BRFix.tmp
+        while read CAMID
+        do
+                $CURL "https://www.waze.com/row-Descartes-live/app/Features?language=pt-BR&bbox=0%2C0%2C0%2C0" -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRFToken" --data-binary "{\"actions\":{\"name\":\"CompositeAction\",\"_subActions\":[{\"_objectType\":\"camera\",\"action\":\"DELETE\",\"attributes\":{\"id\":${CAMID}}}]}}"
+                sleep 1
+        done < "$TMPDIR/BRFix.tmp"
+
+	# Express to MaH by Mota
+        $JQ ".segments.objects[] | select (.roadType==3 and .updatedBy==179594313) | .id" $TMPDIR/BRFix.json > $TMPDIR/BRFix.tmp
+        while read ROADID
+        do
+                $CURL "https://www.waze.com/row-Descartes-live/app/Features?language=pt-BR&bbox=0%2C0%2C0%2C0" -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRFToken" --data-binary "{\"actions\":{\"name\":\"CompositeAction\",\"_subActions\":[{\"name\":\"MultiAction\",\"_subActions\":[{\"_objectType\":\"segment\",\"action\":\"UPDATE\",\"attributes\":{\"roadType\":6,\"routingRoadType\":null,\"id\":${ROADID}}}]}]}}"
+                sleep 1
+        done < "$TMPDIR/BRFix.tmp"
+
+        # Primary+ to MiH by Mota
+        $JQ ".segments.objects[] | select (.roadType==2 and .routingRoadType==7 and .updatedBy==179594313) | .id" $TMPDIR/BRFix.json > $TMPDIR/BRFix.tmp
+        while read ROADID
+        do
+                $CURL "https://www.waze.com/row-Descartes-live/app/Features?language=pt-BR&bbox=0%2C0%2C0%2C0" -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRFToken" --data-binary "{\"actions\":{\"name\":\"CompositeAction\",\"_subActions\":[{\"name\":\"MultiAction\",\"_subActions\":[{\"_objectType\":\"segment\",\"action\":\"UPDATE\",\"attributes\":{\"roadType\":7,\"routingRoadType\":null,\"id\":${ROADID}}}]}]}}"
+                sleep 1
+        done < "$TMPDIR/BRFix.tmp"
+
+        # MaH+ to MaH
+        $JQ ".segments.objects[] | select (.roadType==6 and .routingRoadType==3) | .id" $TMPDIR/BRFix.json > $TMPDIR/BRFix.tmp
+        while read ROADID
+        do 
+                $CURL "https://www.waze.com/row-Descartes-live/app/Features?language=pt-BR&bbox=0%2C0%2C0%2C0" -H "Content-Type: application/json" -H "X-CSRF-Token: $CSRFToken" --data-binary "{\"actions\":{\"name\":\"CompositeAction\",\"_subActions\":[{\"name\":\"MultiAction\",\"_subActions\":[{\"_objectType\":\"segment\",\"action\":\"UPDATE\",\"attributes\":{\"routingRoadType\":null,\"id\":${ROADID}}}]}]}}"
+                sleep 1
+        done < "$TMPDIR/BRFix.tmp"
+
+	#Clean tmp files
+	rm -rf $TMPDIR/BRFix*
+	sleep 1
+
+done < $BOXFILE

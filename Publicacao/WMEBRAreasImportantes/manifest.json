@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "WME BR Áreas Importantes",
+  "description": "Permite aos champs do Brasil realçar e identificar áreas sem ficar mudando script.",
+  "version": "1.2",
+  "content_scripts": [
+    {
+      "matches": ["https://*.waze.com/editor/*", "https://*.waze.com/*/editor/*"],
+      "js": ["WMEBRAreasImportantes.user.js", "WMEBRAreasImportantes.js"]
+    }
+  ],
+  "permissions": ["http://*waze.com/editor/*"],
+  "web_accessible_resources": [
+	"WMEBRAreasImportantes.js"
+  ]
+}

@@ -1,0 +1,36 @@
+Olá,
+
+Bem vindo à comunidade de editores do Waze.
+
+O mapa do Waze é mantido por pessoas comuns, como nós. É como um trabalho de formiguinhas: cada um, conhecedor dos locais onde mora, trabalha e dirige todo dia, faz um pouquinho, ajustando o mapa quando necessário.
+O importante é fazer certo, porque o que um editor faz pode refletir no dia-a-dia dos milhares de usuários de nossa região.
+Como gerente de área (AM), minha função inclui ajudar aos editores a se tornarem cada vez melhores.
+
+Então, para que possa se familiarizar com o sistema de edição, e efetivamente ajudar cada vez mais, convido-o para dar uma lida na documentação começando pelo [url=https://wazeopedia.waze.com/wiki/Brazil/Guia_R%C3%A1pido_de_Edi%C3%A7%C3%A3o_de_Mapas]Guia rápido de edição de mapas[/url].
+Também, leia e esteja a vontade para perguntar suas dúvidas no [url=http://bit.ly/wmeBrasil]nosso forum[/url], e em especial, no sub-fórum do seu estado:
+• [url=https://www.waze.com/forum/viewforum.php?f=1009]São Paulo[/url];
+• [url=https://www.waze.com/forum/viewforum.php?f=1003]Rio de Janeiro[/url];
+• [url=https://www.waze.com/forum/viewforum.php?f=1006]Rondônia[/url];
+• Outros estados, consulte o [url=https://www.waze.com/forum/viewforum.php?f=331]sub-fórum raiz[/url].
+
+Por fim, uma [url=https://www.waze.com/forum/viewtopic.php?f=298&t=31744]lista de links úteis[/url], com (quase) tudo que precisa saber sobre o Waze.                                           
+
+Existe uma hierarquia, dada principalmente pelo nível do editor, de 1 a 6, mas também existem os gerentes de área (AM), que podem gerenciar, conforme suas "promoções", um bairro, um ou vários municípios, um ou mais estados, o país. Por isso algumas vias não podem ser editadas por todos.                                                                                                 
+Mas tudo no espírito colaborativo e bom entendimento.                                                                                                                                           
+Segue algumas dicas, ok?
+- Evitamos remover vias o máximo possível. O Waze é um app de trânsito que utiliza informações em tempo-real mas, quando elas não existem, são usados os dados históricos e estatísticas da via. Remover e criar uma via, simplesmente ZERA as estatísticas e deixa as previsões de rotas mais falíveis. Remover também mata a numeração da via;
+- Sempre quando criamos uma via nova, tentamos fazer o máximo possível para que ela fique supimpa: procuramos o nome oficial, classificamos o tipo da via, numeramos, ligamos tudo, definimos o sentido e as conversões;
+- Não mapeamos estas mini-rotatórias pintadas no chão. Quando mapeamos uma rotatória sempre marcamos o nome como "Nenhum". Podemos colocar um ponto de referência para rotatória quando ela realmente tem nome, por exemplo uma praça ou largo; Existe uma ferramenta, chamada toolbox, que faz isso. Calma. uma coisa de cada vez;
+- Não destruímos rotas de forma alguma e nem forçamos uma boa ou melhor rota para o Waze. Se uma via de barro ou asfaltada é péssima, deixamos que o algorítimos do Waze se virar pois, sendo uma má via, as velocidades médias são baixas;
+- Não matamos rotas por achar que uma área é perigosa, mapeamos tudo corretamente, como deve ser, e que o resto o Waze se vira muito bem. O governo federal começou um projeto com o SAMU e eles estão usando o Waze, não queremos matar uma rota do SAMU para uma área carente;
+- Acredite, fazer da forma mais trabalhosa é o melhor. Se uma área é perigosa nós procuramos o motivo do Waze tentar fazer rotas por lá, sempre encontramos uma escadaria ou beco categorizados erroneamente como ruas. Há muito tempo não temos mais estes casos;
+- Nunca liberamos "roubadinhas" nos mapas; Sempre atentos às leis de trânsito;
+- Não imitamos fielmente as imagens aéreas. Mapeamos pensando em rotas e instruções. Seguimos a filosofia KISS - [i]Keep it simple, stupid[/i] - o mínimo de segmentos e junções. Então, lembrar de sempre remover todas as junções excedentes e desnecessárias;
+- Toda pequena contribuição é super bem vinda. Mas, para que consertar o que não precisa de conserto? Para que tentar consertar um local se lá não há problemas? :)  Claro, um nome escrito errado ou fora do padrão não implica em falha de rota, mas deve ser consertado. Então, neste caso, mexa só no nome ! 
+- Estacionamentos, como de shopping centers, não devem ser 100% mapeados. Apenas seu contorno ou o caminho até o acesso principal.
+- Os alertas de erro recebidos devem respeitar o fluxo de atendimento, conforme descrito no [url=https://www.waze.com/forum/viewtopic.php?f=299&t=69313#p604831]fórum[/url] a todos os editores.
+- Mudança de sentido (inversão) ou mudança de mão dupla para única devem SEMPRE ter suas junções revistas e corrigidas. Para compreensão, vale sempre a leitura e entendimento do [url=https://wazeopedia.waze.com/wiki/Brazil/Restri%C3%A7%C3%B5es_leves_e_fortes]tipo de restrição[/url].
+
+Qualquer dúvida que não for sanada na documentação, no fórum sempre terá uma resposta! ;) Aproveita e se apresenta lá para a galera! [url=https://www.waze.com/forum/viewtopic.php?f=298&t=78047]Esse tópico aqui[/url] é dedicado exclusivamente para gente conhecer a turma toda.
+
+Saudações da comunidade de editores.

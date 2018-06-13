@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5BCB006F-51C9-479D-8380-0804846D1E66}"
+	ProjectSection(SolutionItems) = preProject
+		Creu padrao.txt = Creu padrao.txt
+		MasterBrasil.js = MasterBrasil.js
+		WMEBRAreasImportantes.js = WMEBRAreasImportantes.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Referencia", "Referencia", "{20A87D98-3964-4EF4-A232-B13D4110BD46}"
+	ProjectSection(SolutionItems) = preProject
+		referencia\editor completo 2014-09-30.js = referencia\editor completo 2014-09-30.js
+		referencia\editor completo novo.js = referencia\editor completo novo.js
+		referencia\editor completo.js = referencia\editor completo.js
+		referencia\fixBR.txt = referencia\fixBR.txt
+		referencia\Highlights.js = referencia\Highlights.js
+		referencia\Invalidated Camera Mass Eraser.js = referencia\Invalidated Camera Mass Eraser.js
+		referencia\URO+.js = referencia\URO+.js
+		referencia\WME Chat addon.tamper v3.js = referencia\WME Chat addon.tamper v3.js
+		referencia\WME Chat addon.tamper v4.js = referencia\WME Chat addon.tamper v4.js
+		referencia\WME Junction Node Fixer.tamper.js = referencia\WME Junction Node Fixer.tamper.js
+		referencia\WME_Toolbox.prod.min.js = referencia\WME_Toolbox.prod.min.js
+		referencia\wme_uroverview.3.25.user = referencia\wme_uroverview.3.25.user
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{F8888A75-8406-41BF-B6D9-39FEA964B78C}"
+	ProjectSection(SolutionItems) = preProject
+		img\fluxoFechamento.jpg = img\fluxoFechamento.jpg
+		img\Monster.png = img\Monster.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Publicacao", "Publicacao", "{A60F29BE-44C4-4E3B-8778-70BAC8114269}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pacotao", "Pacotao", "{5F160A95-5646-452E-8CBA-257F3DD10BA8}"
+	ProjectSection(SolutionItems) = preProject
+		Publicacao\PacotãoWMEBrasil\manifest.json = Publicacao\PacotãoWMEBrasil\manifest.json
+		Publicacao\PacotãoWMEBrasil\MasterBrasil.user.js = Publicacao\PacotãoWMEBrasil\MasterBrasil.user.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Areas", "Areas", "{E01FDAE0-5332-4BB4-8B09-FD58E7259277}"
+	ProjectSection(SolutionItems) = preProject
+		Publicacao\WMEBRAreasImportantes\manifest.json = Publicacao\WMEBRAreasImportantes\manifest.json
+		Publicacao\WMEBRAreasImportantes\WMEBRAreasImportantes.user.js = Publicacao\WMEBRAreasImportantes\WMEBRAreasImportantes.user.js
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F160A95-5646-452E-8CBA-257F3DD10BA8} = {A60F29BE-44C4-4E3B-8778-70BAC8114269}
+		{E01FDAE0-5332-4BB4-8B09-FD58E7259277} = {A60F29BE-44C4-4E3B-8778-70BAC8114269}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D571AB96-8FBB-48CE-B7AF-2A8E0B0B4A53}
+	EndGlobalSection
+EndGlobal

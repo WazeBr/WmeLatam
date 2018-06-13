@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+  "name": "WME Delete Cameras",
+  "version": "0.2",
+  "description": "Delete all unconfirmed cameras for Waze Map Editor",
+  "content_scripts": [
+    {
+      "matches": ["https://*.waze.com/editor/*"],
+      "js": ["deleteunkcameras.user.js"]
+    }
+  ],
+  "permissions": ["http://*waze.com/editor/*"],
+  "web_accessible_resources": ["deleteunkcameras.js"]
+}

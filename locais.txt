@@ -1,0 +1,9 @@
+https://www.waze.com/pt-BR/editor/?env=row&lon=-35.23881&lat=-5.73272&layers=2533&zoom=4
+https://editor-beta.waze.com/pt-BR/editor/?env=row&lon=-43.21534&lat=-19.62575&layers=2533&zoom=4
+https://www.waze.com/pt-BR/editor/?env=row&lon=-37.12571&lat=-4.95456&layers=2533&zoom=4
+
+https://editor-beta.waze.com/pt-BR/editor/?env=row&lon=-51.16504&lat=-0.05014&layers=2533&zoom=4
+
+Thai
+https://www.waze.com/pt-BR/editor/?env=row&lon=98.73667&lat=19.18938&layers=2533&zoom=0
+https://www.waze.com/pt-BR/editor/?env=row&lon=103.08910&lat=17.26495&layers=2533&zoom=2

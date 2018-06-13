@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "WME AutoSave",
+  "version": "1.4",
+  "description": "Auto save for Waze Map Editor",
+  "content_scripts": [
+    {
+      "matches": ["https://*.waze.com/editor/*","https://*.waze.com/beta_editor/*"],
+      "js": ["autosave.user.js", "autosave.js"]
+    }
+  ],
+  "web_accessible_resources": [
+          "autosave.js"
+          ]
+}
