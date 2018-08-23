@@ -6,7 +6,7 @@
 // @include             https://www.waze.com/*/editor/*
 // @include             http://www.anp.gov.br/postos/consulta.asp?WmeMunicipio*
 // @include             https://www.google.com.br/maps*
-// @version             0.164
+// @version             0.165
 // @grant               ericdanieldavid, biuick84, JuniorDummer
 // ==/UserScript==
 

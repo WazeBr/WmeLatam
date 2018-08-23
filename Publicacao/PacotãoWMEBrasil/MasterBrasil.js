@@ -3,10 +3,13 @@
 // @namespace           http://greasemonkey.chizzum.com
 // @description         Permite fechar UR velhas, fazer um comentário inicial nas URs sem comentário e outras funções bacanas no WME.
 // @include             https://*.waze.com/*editor*
+// @include             https://www.waze.com/*/livemap*
+// @include             https://www.waze.com/ul?*
+// @include             https://www.waze.com/location?*
 // @include             https://www.waze.com/*/editor/*
 // @include             http://www.anp.gov.br/postos/consulta.asp?WmeMunicipio*
 // @include             https://www.google.com.br/maps*
-// @version             0.164
+// @version             0.165
 // @grant               ericdanieldavid, biuick84, JuniorDummer
 // @icon			data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAYCAYAAAB0kZQKAAAABHNCSVQICAgIfAhkiAAABPNJREFUSIntlU2MldUZx3/nvOe8970fzJ1h5nasUxjAURAzBLilxZk7rUbiBGPSBdiYENNVF924aIIbE+Nel91W2xKb+NG6aEtMm5Io3AFEDCQiBMQMDDPAfA/33ve978c5pwvjRueDIu58krM6ef6/f57znOeBH+K+xuZe2L7+XrPFvSRVq8NPWGcOS+SIn/PWdZQ11jpaDUuSpE2EGBOCP5w5U//HfTdRrVbLQvj/DfKq+tQvtrD+QcuDvV00kyapSchMyp3FlNuThnNnl2g20gu+z9P1en3qvpgYHh7eH4b26MgTvTzz5CBCQCsOvzpJE096FHSBcrHMQmuOzlKZo/++yJlT8ygl9586deKD72RiaGjo8Th2Yy8ceowdj25kemmWvM4TJiGtpEVXoRMtfaQnWGw2KZeKLIWLdHd0c+7zcf7+zjjW0X/2bP36cvre3ZioVPo+fe7g1uKWh8pkqSWnc1jn0FLRU+ohUAFSSoy1LDQXyGkf6yyN6A7l9Qrlw43rrV1TUxN/Xk5frmVgz56hFzf2d1R+skXTikK08picm6WrWKar0EVe51GeQnsa5Wkq5W6kEOS0RivN+NUGc3MxgfZ+vBJDrWXCWQ5u3V4kSTPWF3o4+sFFBn50jbfqt/nN8yN44qtihmmElgqnclgyPhy7zuTH88wEHnt0nmaQrPhT1qyEc27bhr5OlFRML7QY3TTJsVN5pq7fZnxqhjANsc4SpRE3liawGN44co6JTxZ4KJezr/z+IP2jO3j/2LHD91wJhKiU1vnkVUBHl+ZfH1U4tHuWY9e6CEqWKInwPR9LhhQebx85x65tA/z6wC/Zuvu53x2dnXl2S3/v06sh1mzMzZs3vbpzT5k70RKByvPI9gfIOh+m+vN+5hozdARl/Jzm5vQ8f/rjRYK2+/hv9c/euTk5/bjQJbN5Y2X0vff/mV+Nsepz7Ny5d19HWeNJQSm3jjiLSbIYFYTMN+bpLvbQjBsshou0bYjSYvbDK/MXH93UM3p1fOrTvt6e/S/+9ldBsWPbm4ODe/etxFl1Tvx099B/dv2sc9/e4QoSjbEG6xy+5yOlxDpLalJSk2BsSilfRNkCubzA2IxbtxtcvjJHoehz7cs2E+Otw6dP11//JmfZnqjVah/ZTI509kgGq+uI0wQlHVJIPCmITRubWhwW5xxCCAKVx8PHyZRWZDDWUOzw2FntJjUxF843EJaby/GWNeGsGHl4l2HgkQLWGowA62J85YMDJRXS8wGQQuJwOOfIbAo4jDUYa7HOEGcJX1xqsDCbzJ0+U39rOd6yjblhQ/+lpRnvoPDbpDZECIlSkpnpmJuTIYWSBGlITUaaJRhncBiidsrVL5aIk4yg6GiGIZcv3eH8yRip7L6JiYkby/FW7ImhoZED1vB2pQ9vw4Bl/pbHlc8MnucAwYEXHqBU1CAEzjnakeHdv0zhnMMYGNieI0kcU+NZ5Ck7OjY2dnwl1poLbGjvyBEHz0uJCvI+pVKJ6ek5+gc023bkMcbia48L51tcu5xR6e0mbLVoRzHGur+ePHni0FqMu17ltVrNaq1FLghoNZuYzCUmQyCExjk8LTLPQxVLJeJ2myzLOH78+F3prz0xv3YrxEvW2tfaUYRz7tbYyRPfWki1Wu1GO4r6nHM4516+W+3/OwYHB7tWu69Wq+XvDf59xv8Aw6gysUnudcsAAAAASUVORK5CYII=
 // ==/UserScript==
@@ -98,11 +101,56 @@ function genericBootstrap() {
             return dummyElem.onclick();
         })();
     }
-    /* begin running the code! */
-
 
     if (window.location.host.indexOf("waze.com") != -1) {
-        window.setTimeout(genericInitScript, 500);
+        //livemap, UL ou location
+        if (window.location.pathname.indexOf("livemap") != -1)
+        {
+            console.log('Pagamos o livemap. Vamos criar o butão já já.');
+            window.setTimeout(
+                function () {
+
+                    //?lon=-46.87439&lat=-23.18336&zoom=17
+                    var lon = window.location.search.substring(
+                        window.location.search.indexOf("lon=") + 5,
+                        window.location.search.indexOf("&", window.location.search.indexOf("lon=")));
+                    var lat = window.location.search.substring(
+                        window.location.search.indexOf("lat=") + 4,
+                        window.location.search.indexOf("&", window.location.search.indexOf("lat=")));
+
+                    var botao = '<br/><br/><a class="sl-button" href="https://www.waze.com/reporting/location?lat=' + lat + '&lng=' + lon + '&zoom=17" ';
+                    botao += 'target="_blank" >Criar Alerta Programado</a > ';
+                    document.getElementsByClassName("wm-route-tip__body")[0].innerHTML = botao;
+                    
+
+                }, 5000);
+        }
+        else if(window.location.pathname.indexOf("ul") != -1 || window.location.pathname.indexOf("location") != -1)
+        {
+            console.log('Pagamos o livemap UL/Location. Vamos criar o butão já já.');
+            window.setTimeout(
+                function () {
+
+                    //?ll=-23.20178914%2C-46.79734826&navigate=yes&zoom=17"
+                    var inicio = window.location.search.indexOf("ll=");
+                    var meio = window.location.search.indexOf("%2C");
+                    var fim = window.location.search.indexOf("&zoom");
+            
+                    var lon = window.location.search.substring(meio+3, fim); 
+                    var lat = window.location.search.substring(inicio+3, meio);
+
+                    var botao = document.createElement("p");
+                    botao.innerHTML = '<br/><br/><a class="sl-button" href="https://www.waze.com/reporting/location?lat=' + lat + '&lng=' + lon + '&zoom=17" target="_blank" >Criar Alerta Programado</a > ';
+                    document.getElementsByClassName("sl-button")[0].parentElement.appendChild(botao);
+
+                }, 5000);
+        }
+        else if (window.location.pathname.indexOf("editor") != -1 )
+        {
+            console.log('Pagamos o editor. Vamos criar o butão já já.');
+            window.setTimeout(genericInitScript, 500);
+        }
+        return;
     }
     else if (window.location.host.indexOf("anp.gov.br") != -1) {
         window.setTimeout(
@@ -132,6 +180,7 @@ function genericBootstrap() {
     }
     else if (window.location.href.indexOf("google.com.br/maps") != -1) {
         window.setTimeout(googleInitWme, 5000);
+        return;
     }
 }
 
@@ -933,12 +982,6 @@ function genericMontarHTML() {
         document.getElementById('_btnResolver').onclick = funUR_ResolverVisiveis;
         document.getElementById('btnFanfarrao').onclick = funUR_ContarFechadasUsuario;
         document.getElementById('_MUV_btnFechaMP').onclick = funUR_EncerramentoMP;
-    }
-
-    if (wazeModel.loginManager.user.id == 12739915 || //Eu
-        wazeModel.loginManager.user.id == 11014131 //maruskk
-    ) {
-        document.getElementById('btnLigarUturns').onclick = maruskk;
     }
 
     if (JNFInstalado) {
@@ -2393,8 +2436,8 @@ function funVia_ProtegerMapa() {
                 genericAssincCommand(instrucao, false);
 
                 instrucao = "\
-                wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].subActions[0].oldAttributes = { lockRank: " + segmento.attributes.lockRank + " };    \
-                wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].subActions[0].newAttributes = { lockRank: null };                                    \
+                wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].subActions[0].oldAttributes = { lockRank: " + segmento.attributes.lockRank + " };    \
+                wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].subActions[0].newAttributes = { lockRank: null };                                    \
                 $('[name=\"lockRank\"]')[0].value = null;";
                 console.log(instrucao);
                 genericAssincCommand(instrucao, true);
@@ -3537,10 +3580,10 @@ function funPlace_LockPlace() {
                     genericAssincCommand(instrucao, false);
 
                     instrucao = "                                                                               \
-                    wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].newAttributes = \
+                    wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].newAttributes = \
                         { lockRank: " + lvlLock + " };                                                          \
                                                                                                                 \
-                    wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].oldAttributes = \
+                    wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].oldAttributes = \
                         { lockRank: " + landmark.attributes.lockRank + " };";
                     genericAssincCommand(instrucao, true);
                 }
@@ -4979,12 +5022,12 @@ function funRevPla_MudarBandeira(novoNome, bandeira) {
     genericAssincCommand(instrucao, false);
 
     instrucao = "                                                                               \
-                wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].newAttributes = \
+                wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].newAttributes = \
                     { name: \""+ novoNome + "\", brand: \"" + bandeira + "\" };                             \
                                                                                                             \
                 $('[name=\"name\"]')[0].value = \""+ novoNome + "\";                                        \
                                                                                                             \
-                wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].oldAttributes = \
+                wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].oldAttributes = \
                     { name: \"\", brand: \"\" };";
     genericAssincCommand(instrucao, true);
 }
@@ -4994,12 +5037,12 @@ function funRevPla_NovoNome(novoNome) {
     genericAssincCommand(instrucao, false);
 
     instrucao = "                                                                               \
-            wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].newAttributes = \
+            wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].newAttributes = \
                 { name: \"" + novoNome + "\"};                                                          \
                                                                                                         \
             $('[name=\"name\"]')[0].value = \""+ novoNome + "\";                                        \
                                                                                                         \
-            wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].oldAttributes = \
+            wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].oldAttributes = \
                 { name: \"\" };";
 
     genericAssincCommand(instrucao, true);
@@ -5013,12 +5056,12 @@ function funRevPla_AdicionarAlternativo(alternativo) {
     genericAssincCommand(instrucao, false);
 
     instrucao = "                                                                                       \
-            wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].newAttributes = \
+            wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].newAttributes = \
                 { aliases: [\"" + alternativo + "\"] };                                                 \
                                                                                                         \
             $('[class=\"alias-name form-control\"]')[0].value = \"" + alternativo + "\";                    \
                                                                                                         \
-            wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].oldAttributes = \
+            wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].oldAttributes = \
                 { aliases: [] };";
 
     genericAssincCommand(instrucao, true);
@@ -5058,12 +5101,12 @@ function funRevPla_Descricao(descricao) {
     genericAssincCommand(instrucao, false);
 
     instrucao = "                                                                                       \
-            wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].newAttributes = \
+            wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].newAttributes = \
                 { description: \"" + descricao + "\"};                                                  \
                                                                                                         \
             $('[name=\"description\"]')[0].value = \"" + descricao + "\";                               \
                                                                                                         \
-            wazeModel.actionManager.actions[wazeModel.actionManager.actions.length - 1].oldAttributes = \
+            wazeModel.actionManager.getActions()[wazeModel.actionManager.getActions().length - 1].oldAttributes = \
                 { description: \"\" };";
 
     genericAssincCommand(instrucao, true);
@@ -5323,24 +5366,6 @@ JNF_Chupinhado = function (node, doJunctions, CorrigeU) {
         WCENC.toggleShowAllArrows();
     }
 }
-
-maruskk = function () {
-    for (var seg in wazeModel.segments.objects) {
-
-        var segmento = wazeModel.segments.objects[seg];
-
-        if (segmento.attributes.fwdDirection && 
-            segmento.attributes.revDirection &&
-            funRevVia_VerificarSegmentoVisivel(segmento)) {
-            funRevVia_SelecionarSegmento(segmento, false);
-
-            var instrucao = "if (document.getElementsByClassName(\"arrow uturn closed\").length > 0) document.getElementsByClassName(\"arrow uturn closed\")[0].click();";
-            genericAssincCommand(instrucao, false);
-
-            genericAssincCommand(instrucao, false);
-        }
-    }
-};
 
 /*FINAL*/
 
