@@ -2851,7 +2851,7 @@ function funVia_AplicarMudancaCidade() {
             }
             else {
                 comando = "$('[name=stateID]').val(\"" + seg_IdEstadoCidadeEscolhida_MudancaCidade + "\");          \
-                $('input[name=\"cityName\"]').attr(\"value\", \"" + seg_NomeCidadeEscolhida_MudancaCidade + "\");";
+                $('input[name=\"city-name\"]').attr(\"value\", \"" + seg_NomeCidadeEscolhida_MudancaCidade + "\");";
             }
             genericAssincCommand(comando);
 
@@ -4637,14 +4637,14 @@ function funRevVia_CorrigirSegmentoSangrento(segmento) {
     genericAssincCommand(instrucao, false);
 
     if (seg_NomeCidadeEscolhida != null) {
-        instrucao = "$('input[name=\"cityName\"]').attr(\"value\",\"" + seg_NomeCidadeEscolhida + "\");";
+        instrucao = "$('input[name=\"city-name\"]').attr(\"value\",\"" + seg_NomeCidadeEscolhida + "\");";
     }
     else {
-        instrucao = "$('input[name=\"emptyCity\"]').click();";
+        instrucao = "$('id[name=\"empty-city\"]').click();";
     }
     genericAssincCommand(instrucao, false);
 
-    instrucao = "$('input[name=\"emptyStreet\"]').click();";
+    instrucao = "$('input[id=\"empty-street\"]').click();";
     genericAssincCommand(instrucao, false);
 
 }
