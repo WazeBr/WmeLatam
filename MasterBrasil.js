@@ -9,7 +9,7 @@
 // @include             https://www.waze.com/*/editor/*
 // @include             http://www.anp.gov.br/postos/consulta.asp?WmeMunicipio*
 // @include             https://www.google.com.br/maps*
-// @version             0.167
+// @version             0.168
 // @grant               ericdanieldavid, biuick84, JuniorDummer
 // @icon			data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAYCAYAAAB0kZQKAAAABHNCSVQICAgIfAhkiAAABPNJREFUSIntlU2MldUZx3/nvOe8970fzJ1h5nasUxjAURAzBLilxZk7rUbiBGPSBdiYENNVF924aIIbE+Nel91W2xKb+NG6aEtMm5Io3AFEDCQiBMQMDDPAfA/33ve978c5pwvjRueDIu58krM6ef6/f57znOeBH+K+xuZe2L7+XrPFvSRVq8NPWGcOS+SIn/PWdZQ11jpaDUuSpE2EGBOCP5w5U//HfTdRrVbLQvj/DfKq+tQvtrD+QcuDvV00kyapSchMyp3FlNuThnNnl2g20gu+z9P1en3qvpgYHh7eH4b26MgTvTzz5CBCQCsOvzpJE096FHSBcrHMQmuOzlKZo/++yJlT8ygl9586deKD72RiaGjo8Th2Yy8ceowdj25kemmWvM4TJiGtpEVXoRMtfaQnWGw2KZeKLIWLdHd0c+7zcf7+zjjW0X/2bP36cvre3ZioVPo+fe7g1uKWh8pkqSWnc1jn0FLRU+ohUAFSSoy1LDQXyGkf6yyN6A7l9Qrlw43rrV1TUxN/Xk5frmVgz56hFzf2d1R+skXTikK08picm6WrWKar0EVe51GeQnsa5Wkq5W6kEOS0RivN+NUGc3MxgfZ+vBJDrWXCWQ5u3V4kSTPWF3o4+sFFBn50jbfqt/nN8yN44qtihmmElgqnclgyPhy7zuTH88wEHnt0nmaQrPhT1qyEc27bhr5OlFRML7QY3TTJsVN5pq7fZnxqhjANsc4SpRE3liawGN44co6JTxZ4KJezr/z+IP2jO3j/2LHD91wJhKiU1vnkVUBHl+ZfH1U4tHuWY9e6CEqWKInwPR9LhhQebx85x65tA/z6wC/Zuvu53x2dnXl2S3/v06sh1mzMzZs3vbpzT5k70RKByvPI9gfIOh+m+vN+5hozdARl/Jzm5vQ8f/rjRYK2+/hv9c/euTk5/bjQJbN5Y2X0vff/mV+Nsepz7Ny5d19HWeNJQSm3jjiLSbIYFYTMN+bpLvbQjBsshou0bYjSYvbDK/MXH93UM3p1fOrTvt6e/S/+9ldBsWPbm4ODe/etxFl1Tvx099B/dv2sc9/e4QoSjbEG6xy+5yOlxDpLalJSk2BsSilfRNkCubzA2IxbtxtcvjJHoehz7cs2E+Otw6dP11//JmfZnqjVah/ZTI509kgGq+uI0wQlHVJIPCmITRubWhwW5xxCCAKVx8PHyZRWZDDWUOzw2FntJjUxF843EJaby/GWNeGsGHl4l2HgkQLWGowA62J85YMDJRXS8wGQQuJwOOfIbAo4jDUYa7HOEGcJX1xqsDCbzJ0+U39rOd6yjblhQ/+lpRnvoPDbpDZECIlSkpnpmJuTIYWSBGlITUaaJRhncBiidsrVL5aIk4yg6GiGIZcv3eH8yRip7L6JiYkby/FW7ImhoZED1vB2pQ9vw4Bl/pbHlc8MnucAwYEXHqBU1CAEzjnakeHdv0zhnMMYGNieI0kcU+NZ5Ck7OjY2dnwl1poLbGjvyBEHz0uJCvI+pVKJ6ek5+gc023bkMcbia48L51tcu5xR6e0mbLVoRzHGur+ePHni0FqMu17ltVrNaq1FLghoNZuYzCUmQyCExjk8LTLPQxVLJeJ2myzLOH78+F3prz0xv3YrxEvW2tfaUYRz7tbYyRPfWki1Wu1GO4r6nHM4516+W+3/OwYHB7tWu69Wq+XvDf59xv8Aw6gysUnudcsAAAAASUVORK5CYII=
 // ==/UserScript==
@@ -4625,18 +4625,20 @@ function funRevVia_AbrirPainel(painelAberto) {  ///ABRIR PAINEL PARA EDIÇÃO DO
 }
 
 function funRevVia_CorrigirSegmentoSangrento(segmento) {
-    var instrucao = "$('[name=stateID]').val(\"" + seg_IdEstadoCidadeEscolhida + "\");";
-    genericAssincCommand(instrucao, false);
+    var instrucao = "";
 
     if (seg_NomeCidadeEscolhida != null) {
-        instrucao = "$('input[name=\"cityName\"]').attr(\"value\",\"" + seg_NomeCidadeEscolhida + "\");";
+        instrucao = "$('[class=\"form-control state-id\"]').val(\"" + seg_IdEstadoCidadeEscolhida + "\");";
+        genericAssincCommand(instrucao, false);
+
+        instrucao = "$('input[class=\"city-name form-control\"]').attr(\"value\",\"" + seg_NomeCidadeEscolhida + "\");";
     }
     else {
-        instrucao = "$('input[name=\"emptyCity\"]').click();";
+        instrucao = "$('input[class=\"empty-city\"]').click();";
     }
     genericAssincCommand(instrucao, false);
 
-    instrucao = "$('input[name=\"emptyStreet\"]').click();";
+    instrucao = "$('input[class=\"empty-street\"]').click();";
     genericAssincCommand(instrucao, false);
 
 }
