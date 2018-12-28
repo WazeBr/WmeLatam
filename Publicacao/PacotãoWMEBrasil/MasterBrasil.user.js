@@ -3,10 +3,10 @@
 // @namespace           http://greasemonkey.chizzum.com
 // @description         Permite fechar UR velhas, fazer um comentário inicial nas URs sem comentário e outras funções bacanas no WME.
 // @include             https://*.waze.com/*editor*
-// @include             https://www.waze.com/*/editor/*
+// @include             https://www.waze.com/*
 // @include             http://www.anp.gov.br/postos/consulta.asp?WmeMunicipio*
 // @include             https://www.google.com.br/maps*
-// @version             0.165
+// @version             0.169
 // @grant               ericdanieldavid, biuick84, JuniorDummer
 // ==/UserScript==
 

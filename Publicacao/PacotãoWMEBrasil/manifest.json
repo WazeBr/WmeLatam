@@ -3,14 +3,14 @@
 
   "name": "WME Latam Pack",
   "description": "Permite fechar UR velhas, fazer um comentário inicial nas URs sem comentário e outras funções bacanas no WME.",
-  "version": "0.165",
+  "version": "0.169",
   "content_scripts": [
     {
-      "matches": ["https://*.waze.com/editor/*", "https://*.waze.com/*/editor/*", "http://www.anp.gov.br/postos/consulta.asp?WmeMunicipio*", "https://www.google.com.br/maps*"],
+      "matches": ["https://www.waze.com/*", "https://*.waze.com/editor/*", "https://*.waze.com/*/editor/*", "http://www.anp.gov.br/postos/consulta.asp?WmeMunicipio*", "https://www.google.com.br/maps*"],
       "js": ["MasterBrasil.user.js", "MasterBrasil.js"]
     }
   ],
-  "permissions": ["http://*waze.com/editor/*", "https://*spreadsheets.google.com/*", "http://www.anp.gov.br/*"],
+  "permissions": ["https://www.waze.com/*", "http://*waze.com/editor/*", "https://*spreadsheets.google.com/*", "http://www.anp.gov.br/*" ],
   "web_accessible_resources": [
 	"MasterBrasil.js"
   ]
