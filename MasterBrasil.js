@@ -3,13 +3,10 @@
 // @namespace           http://greasemonkey.chizzum.com
 // @description         Permite fechar UR velhas, fazer um comentário inicial nas URs sem comentário e outras funções bacanas no WME.
 // @include             https://*.waze.com/*editor*
-// @include             https://www.waze.com/*/livemap*
-// @include             https://www.waze.com/ul*
-// @include             https://www.waze.com/location*
-// @include             https://www.waze.com/*/editor/*
+// @include             https://www.waze.com/*
 // @include             http://www.anp.gov.br/postos/consulta.asp?WmeMunicipio*
 // @include             https://www.google.com.br/maps*
-// @version             0.168
+// @version             0.169
 // @grant               ericdanieldavid, biuick84, JuniorDummer
 // @icon			data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAYCAYAAAB0kZQKAAAABHNCSVQICAgIfAhkiAAABPNJREFUSIntlU2MldUZx3/nvOe8970fzJ1h5nasUxjAURAzBLilxZk7rUbiBGPSBdiYENNVF924aIIbE+Nel91W2xKb+NG6aEtMm5Io3AFEDCQiBMQMDDPAfA/33ve978c5pwvjRueDIu58krM6ef6/f57znOeBH+K+xuZe2L7+XrPFvSRVq8NPWGcOS+SIn/PWdZQ11jpaDUuSpE2EGBOCP5w5U//HfTdRrVbLQvj/DfKq+tQvtrD+QcuDvV00kyapSchMyp3FlNuThnNnl2g20gu+z9P1en3qvpgYHh7eH4b26MgTvTzz5CBCQCsOvzpJE096FHSBcrHMQmuOzlKZo/++yJlT8ygl9586deKD72RiaGjo8Th2Yy8ceowdj25kemmWvM4TJiGtpEVXoRMtfaQnWGw2KZeKLIWLdHd0c+7zcf7+zjjW0X/2bP36cvre3ZioVPo+fe7g1uKWh8pkqSWnc1jn0FLRU+ohUAFSSoy1LDQXyGkf6yyN6A7l9Qrlw43rrV1TUxN/Xk5frmVgz56hFzf2d1R+skXTikK08picm6WrWKar0EVe51GeQnsa5Wkq5W6kEOS0RivN+NUGc3MxgfZ+vBJDrWXCWQ5u3V4kSTPWF3o4+sFFBn50jbfqt/nN8yN44qtihmmElgqnclgyPhy7zuTH88wEHnt0nmaQrPhT1qyEc27bhr5OlFRML7QY3TTJsVN5pq7fZnxqhjANsc4SpRE3liawGN44co6JTxZ4KJezr/z+IP2jO3j/2LHD91wJhKiU1vnkVUBHl+ZfH1U4tHuWY9e6CEqWKInwPR9LhhQebx85x65tA/z6wC/Zuvu53x2dnXl2S3/v06sh1mzMzZs3vbpzT5k70RKByvPI9gfIOh+m+vN+5hozdARl/Jzm5vQ8f/rjRYK2+/hv9c/euTk5/bjQJbN5Y2X0vff/mV+Nsepz7Ny5d19HWeNJQSm3jjiLSbIYFYTMN+bpLvbQjBsshou0bYjSYvbDK/MXH93UM3p1fOrTvt6e/S/+9ldBsWPbm4ODe/etxFl1Tvx099B/dv2sc9/e4QoSjbEG6xy+5yOlxDpLalJSk2BsSilfRNkCubzA2IxbtxtcvjJHoehz7cs2E+Otw6dP11//JmfZnqjVah/ZTI509kgGq+uI0wQlHVJIPCmITRubWhwW5xxCCAKVx8PHyZRWZDDWUOzw2FntJjUxF843EJaby/GWNeGsGHl4l2HgkQLWGowA62J85YMDJRXS8wGQQuJwOOfIbAo4jDUYa7HOEGcJX1xqsDCbzJ0+U39rOd6yjblhQ/+lpRnvoPDbpDZECIlSkpnpmJuTIYWSBGlITUaaJRhncBiidsrVL5aIk4yg6GiGIZcv3eH8yRip7L6JiYkby/FW7ImhoZED1vB2pQ9vw4Bl/pbHlc8MnucAwYEXHqBU1CAEzjnakeHdv0zhnMMYGNieI0kcU+NZ5Ck7OjY2dnwl1poLbGjvyBEHz0uJCvI+pVKJ6ek5+gc023bkMcbia48L51tcu5xR6e0mbLVoRzHGur+ePHni0FqMu17ltVrNaq1FLghoNZuYzCUmQyCExjk8LTLPQxVLJeJ2myzLOH78+F3prz0xv3YrxEvW2tfaUYRz7tbYyRPfWki1Wu1GO4r6nHM4516+W+3/OwYHB7tWu69Wq+XvDf59xv8Aw6gysUnudcsAAAAASUVORK5CYII=
 // ==/UserScript==
@@ -104,28 +101,7 @@ function genericBootstrap() {
 
     if (window.location.host.indexOf("waze.com") != -1) {
         //livemap, UL ou location
-        if (window.location.pathname.indexOf("livemap") != -1)
-        {
-            console.log('Pagamos o livemap. Vamos criar o butão já já.');
-            window.setTimeout(
-                function () {
-
-                    //?lon=-46.87439&lat=-23.18336&zoom=17
-                    var lon = window.location.search.substring(
-                        window.location.search.indexOf("lon=") + 5,
-                        window.location.search.indexOf("&", window.location.search.indexOf("lon=")));
-                    var lat = window.location.search.substring(
-                        window.location.search.indexOf("lat=") + 4,
-                        window.location.search.indexOf("&", window.location.search.indexOf("lat=")));
-
-                    var botao = '<br/><br/><a class="sl-button" href="https://www.waze.com/reporting/location?lat=' + lat + '&lng=' + lon + '&zoom=17" ';
-                    botao += 'target="_blank" >Criar Alerta Programado</a > ';
-                    document.getElementsByClassName("wm-route-tip__body")[0].innerHTML = botao;
-                    
-
-                }, 5000);
-        }
-        else if(window.location.pathname.indexOf("ul") != -1 || window.location.pathname.indexOf("location") != -1)
+        if (window.location.pathname.indexOf("livemap") != -1 || window.location.pathname.indexOf("ul") != -1 || window.location.pathname.indexOf("location") != -1)
         {
             console.log('Pagamos o livemap UL/Location. Vamos criar o butão já já.');
             window.setTimeout(
@@ -139,9 +115,9 @@ function genericBootstrap() {
                     var lon = window.location.search.substring(meio+3, fim); 
                     var lat = window.location.search.substring(inicio+3, meio);
 
-                    var botao = document.createElement("p");
-                    botao.innerHTML = '<br/><br/><a class="sl-button" href="https://www.waze.com/reporting/location?lat=' + lat + '&lng=' + lon + '&zoom=17" target="_blank" >Criar Alerta Programado</a > ';
-                    document.getElementsByClassName("sl-button")[0].parentElement.appendChild(botao);
+                    var botao = '<br/><br/><a class="wz-app-button is-primary js-routing-button" href="https://www.waze.com/reporting/location?lat=' + lat + '&lng=' + lon + '&zoom=17" ';
+                    botao += 'target="_blank" >Criar Alerta Programado</a > ';
+                    document.getElementsByClassName("wz-app-button-container")[0].innerHTML += botao;
 
                 }, 5000);
         }
@@ -691,8 +667,6 @@ function genericMontarHTML() {
     tabbyHTML += '<td valign="center" align="center" id="_tabURs"><a href="#" id="_linkURs" style="text-decoration:none;font-size:12px">URs</a></td>';
     /*aba Vias, link e definição*/
     tabbyHTML += '<td valign="center" align="center" id="_tabVias"><a href="#" id="_linkVias" style="text-decoration:none;font-size:12px">Vias</a></td>';
-    /*aba Vias Monitaradas, link e definição*/
-    tabbyHTML += '<td valign="center" align="center" id="_tabViasMonitoradas"><a href="#" id="_linkViasMonitoradas" style="text-decoration:none;font-size:12px">Vias Monitoradas</a></td>';
     /*aba Places, link e definição*/
     tabbyHTML += '<td valign="center" align="center" id="_tabPlaces"><a href="#" id="_linkPlaces" style="text-decoration:none;font-size:12px">Places</a></td>';
     /*aba Outras, link e definição*/
@@ -811,12 +785,6 @@ function genericMontarHTML() {
 
     abaVias.innerHTML += 'Tolerância de alinhamento para seleção: <input type="number" min="0" value="1" size="2" style="width:50px;line-height:14px;height:22px;margin-bottom:4px;"	id="inputToleranciaAlinhamento" title="Sabe aquela coisa chata de ter que selecionar vários picadinhos de segmentos sem nome, para depois colocar o nome nos benditos? Bem selecione apenas dois deles, que estejam juntos. Na aba WME Brasil vai ter um botão que te ajudará muito."/><br/>';
 
-    /*conteúdo aba Vias Monitoradas*/
-    abaViasMonitoradas = document.createElement('p');
-    abaViasMonitoradas.id = 'abaViasMonitoradas';
-    abaViasMonitoradas.style = 'height:300px!important;';
-    abaViasMonitoradas.innerHTML = '<br/>';
-
     /*conteúdo aba Places*/
     abaPlaces = document.createElement('p');
     abaPlaces.id = 'abaPlaces';
@@ -894,7 +862,6 @@ function genericMontarHTML() {
 
     abaOutrasFuncoes.innerHTML += '<hr style="margin-top: 10px;margin-bottom:10px;">';
     abaOutrasFuncoes.innerHTML += 'Intervalo das execuções assíncronas (em segundos): <input type="number" min="1" value="1" size="2" style="width:50px;line-height:14px;height:22px;margin-bottom:4px;"	id="inputExecAssync" title="Revisão de nomes, aprovação de places e outras coisas usam esse valor para calcular o tempo de cada comando a ser executado."/><br/>';
-    abaOutrasFuncoes.innerHTML += 'Validade monitoria (em dias): <input type="number" min="1" value="20" size="2" style="width:50px;line-height:14px;height:22px;margin-bottom:4px;"	id="inputDiasMonitoria"/><br/>';
 
     abaOutrasFuncoes.innerHTML += '<input type="checkbox" id="chkLocalizaNovatos" checked="true">Localiza novatos.</input><br/>';
     abaOutrasFuncoes.innerHTML += '<input type="checkbox" id="chkDebugMode">Debug Mode</input><br/>';
@@ -923,7 +890,7 @@ function genericMontarHTML() {
     pckControls.appendChild(abaURS);
     pckControls.appendChild(abaVias);
     pckControls.appendChild(abaPlaces);
-    pckControls.appendChild(abaViasMonitoradas);
+    
     pckControls.appendChild(abaOutrasFuncoes);
     pckControls.appendChild(rodapezinho);
 
@@ -954,10 +921,6 @@ function genericMontarHTML() {
         document.getElementById('inputExecAssync').value = localStorage.getItem("inputExecAssync");
     }
 
-    if (localStorage.getItem("inputDiasMonitoria") != null) {
-        document.getElementById('inputDiasMonitoria').value = localStorage.getItem("inputDiasMonitoria");
-    }
-
     if (localStorage.getItem("chkAutoSave") != null) {
         document.getElementById('chkAutoSave').checked = localStorage.getItem("chkAutoSave") === "true";
         document.getElementById('inputQtddSave').value = localStorage.getItem("inputQtddSave");
@@ -967,7 +930,7 @@ function genericMontarHTML() {
     //Abas
     document.getElementById('_linkURs').onclick = function () { funNav_TabExibirFuncoes('URs') };
     document.getElementById('_linkVias').onclick = function () { funNav_TabExibirFuncoes('Vias') };
-    document.getElementById('_linkViasMonitoradas').onclick = function () { funNav_TabExibirFuncoes('ViasMonitoradas') };
+    
     document.getElementById('_linkPlaces').onclick = function () { funNav_TabExibirFuncoes('Places') };
     document.getElementById('_linkOutrasFuncoes').onclick = function () { funNav_TabExibirFuncoes('OutrasFuncoes') };
     //Botões
@@ -1041,7 +1004,6 @@ function genericMontarHTML() {
 
     document.getElementById('chkClosures').onclick = genericPersistirCheckboxes;
     document.getElementById('inputExecAssync').onchange = function () { localStorage.setItem("inputExecAssync", document.getElementById('inputExecAssync').value); };
-    document.getElementById('inputDiasMonitoria').onchange = function () { localStorage.setItem("inputDiasMonitoria", document.getElementById('inputDiasMonitoria').value); };
 
     document.getElementById('chkAutoSave').onclick = function () {
         localStorage.setItem("chkAutoSave", document.getElementById('chkAutoSave').checked);
@@ -1082,7 +1044,6 @@ function genericMontarHTML() {
 
     window.setInterval(funOu_Realcadores, 8000);//8 segundos
     window.setInterval(funOu_AssyncEngine, 5000);//5 segundos
-    window.setInterval(funVia_MonitorarCriarLista, 120000);//2 minuto
 
     window.setTimeout(genericTraducoes, 5000);
 
@@ -1218,11 +1179,6 @@ function genericMontarHTML_Selecionados() {
                 alternativeContent.innerHTML += '<input type="checkbox" id="chkMarcarSemCidade" /> Definir sem cidade.<br/>';
                 alternativeContent.innerHTML += '<input type="button" id="btnTrocarCidadeSelecionados" value="Alterar cidade"/><br/>';
 
-                //---------------------------------------------
-                alternativeContent.innerHTML += '<hr style="margin-top: 10px;margin-bottom:10px;">';
-                alternativeContent.innerHTML += 'Que tal monitorar os segmentos selecionados?<br/>';
-                alternativeContent.innerHTML += '<input type="button" id="btnMonitorar" value="Monitorar segmentos"/><br/><br/>';
-
                 if (segmentosSelecionados.length == 1) {
                     alternativeContent.innerHTML += '<input type="button" id="btnPesquisar" value="Pesquisar segmento no forum"/><br/>';
                     document.getElementById('btnPesquisar').onclick = funVia_PesquisarSegmentoForum;
@@ -1249,7 +1205,6 @@ function genericMontarHTML_SelecionadosAtribuirBotoes() {
 
         document.getElementById('_btnApagarNumeros').onclick = funVia_ApagarTodosNumeros;
 
-        document.getElementById('btnMonitorar').onclick = funVia_Monitorar;
         document.getElementById('selTrocarCidadeSelecionados').onfocus = function () {
             genericLoadDropDownCidades('selTrocarCidadeSelecionados');
             document.getElementById('chkMarcarSemCidade').checked = false;
@@ -2623,133 +2578,6 @@ function funVia_AplicarNomeAlternativo() {
         genericAssincCommand(instrucao);
 
     }
-}
-
-function funVia_Monitorar() {
-    var monitorados = JSON.parse(localStorage.getItem('WmeSegmentosMonitorar')); //idSegmento,    lon,    lat,    zoom,   horarioAtual
-
-    if (monitorados == null) {
-        monitorados = [];
-    }
-
-    //Agora vamos ver se elas não tem nome mesmo. (se uma tiver, tiro a liberação do botão)
-    for (i = 0; i < Waze.selectionManager.getSelectedFeatures().length; i++) {
-        for (var seg in wazeModel.segments.objects) {
-            var segmento = wazeModel.segments.objects[seg];
-
-            if (segmento.geometry.id == Waze.selectionManager.getSelectedFeatures()[i].geometry.id) {
-
-                console.log(segmento);
-
-                var jaMonitora = false;
-                for (var i = 0; i < monitorados.length; i++) {
-                    if (monitorados[i][enuSegMonCols.idSegmento] == segmento.attributes.id) {
-                        monitorados[i][enuSegMonCols.horarioAtual] = Date.now();
-                        jaMonitora = true;
-                        break;
-                    }
-                }
-
-                //var enuSegMonCols = { idSegmento: 0, horarioAtual: 1, bounds:2, streeName:3, zoom: 4 };
-                if (!jaMonitora) {
-                    monitorados.push(
-                        [
-                            segmento.attributes.id,
-                            Date.now(),
-                            [segmento.geometry.getBounds().clone()],
-                            segmento.getAddress().street.name,
-                            Waze.map.zoom
-                        ]
-                    );
-                }
-                break;
-            }
-        }
-    }
-
-    console.log(monitorados);
-    localStorage.setItem('WmeSegmentosMonitorar', JSON.stringify(monitorados));
-
-    console.log('Lista atualizada.');
-
-    funVia_MonitorarCriarLista();
-
-}
-
-function funVia_MonitorarCriarLista() {
-
-    var monitorados = JSON.parse(localStorage.getItem('WmeSegmentosMonitorar')); //idSegmento,    lon,    lat,    zoom,   horarioAtual
-
-    if (monitorados == null)
-    {
-        monitorados = [];
-    }
-
-    //Antes de montar vamos tirar os velhos e fazer o sort
-    var validadeMonitoria = document.getElementById('inputDiasMonitoria').value * 86400000; //1 dia
-    monitorados = monitorados.sort(genericSortList);
-
-    var abaMonitoria = document.getElementById("abaViasMonitoradas");
-    abaMonitoria.innerHTML = "<br/>";//limpar.
-
-    var idsRemover = -1;
-    for (var i = 0; i < monitorados.length; i++) {
-
-        if (monitorados[i][enuSegMonCols.horarioAtual] + validadeMonitoria < Date.now()) {
-            idsRemover = i;
-        }
-        else {
-            var bt = document.createElement("input");
-            bt.type = "button";
-            bt.id = 'btn' + monitorados[i][enuSegMonCols.idSegmento];
-            bt.value = "Ir";
-            bt.onclick = funVia_MonitorarIrAteLa;
-
-            var typ = document.createAttribute("idMonitorado");
-            typ.value = i;
-            bt.attributes.setNamedItem(typ);
-
-            abaMonitoria.appendChild(bt);
-
-            abaMonitoria.appendChild(document.createTextNode(new Date(monitorados[i][enuSegMonCols.horarioAtual]).toLocaleDateString() + ' - ' + monitorados[i][enuSegMonCols.streeName]));
-            abaMonitoria.appendChild(document.createElement("br"));
-        }
-    }
-
-    if (idsRemover != -1) {
-        monitorados.slice(idsRemover);
-    }
-
-    localStorage.setItem('WmeSegmentosMonitorar', JSON.stringify(monitorados));
-}
-
-function funVia_MonitorarIrAteLa() {
-    console.log(this.attributes.idMonitorado);
-
-    var monitorados = JSON.parse(localStorage.getItem('WmeSegmentosMonitorar')); //idSegmento,    lon,    lat,    zoom,   horarioAtual
-    var itemMonitorado = monitorados[this.attributes.idMonitorado.value];
-
-    console.log(itemMonitorado);
-
-    Waze.selectionManager.unselectAll();
-
-    //left, bottom, rigth, top
-    var t = new OpenLayers.Bounds(itemMonitorado[enuSegMonCols.bounds][0].left, itemMonitorado[enuSegMonCols.bounds][0].bottom, itemMonitorado[enuSegMonCols.bounds][0].right, itemMonitorado[enuSegMonCols.bounds][0].top);
-    console.log(t);
-    Waze.map.zoomToExtent(t);
-    Waze.map.zoomTo(itemMonitorado[enuSegMonCols.zoom]);
-
-    var segmento = wazeModel.segments.objects[itemMonitorado[enuSegMonCols.idSegmento]];
-
-    window.setTimeout(
-        function () {
-            console.log(segmento);
-
-            var t = [];
-            t.push(segmento);
-            Waze.selectionManager.setSelectedModels(t);
-        }
-        , 3000);
 }
 
 function genericGerarIframe(timeout, id, sourceLink) {
@@ -4690,6 +4518,10 @@ function funRevVia_CorrigirGrafiaNome(segmento, segmentoSts, NomesModificados, i
     if (iStreetLocalizada == 0) {
 
         instrucao = "document.getElementsByClassName(\"form-control street-name tts-input\")[0].value = \"" + NomesModificados[iStreetLocalizada] + "\";";
+        genericAssincCommand(instrucao, false);
+
+        //Força o campo a saber que mudou. O WME guarda o valor em algum outro canto.
+        instrucao = "$('[class=\"form-control street-name tts-input\"]').trigger('change');";
         genericAssincCommand(instrucao, false);
 
     }
